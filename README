@@ -1,0 +1,5 @@
+
+
+ln -s htaccess .htaccess
+ln -s q.py   q.py.mpy           # make it a mod_python script for speed
+ln -s wb.py  wb.py.cgi          # make it a cgi script

@@ -1,0 +1,64 @@
+Welcome to Richard's whiteboard thing.  To figure out what this does,
+open the <a href="test.wb">test page</a> in several tabs at once, and
+try editing in one tab.  Then check the other.<p>
+
+<b>New pages</b>:
+<ul>
+<li><a href="wb.py.cgi?new=1">Random blank page</a>
+<li><form action="wb.py.cgi" method="get">
+    <input type="hidden" name="new" value="1">
+    A page named:  
+    <input type="text" name="prefix"> +"_" + (random postfix)
+    <input type="submit" value="Go">
+    </form>
+<li><form action="wb.py.cgi" method="get">
+    <input type="hidden" name="new" value="1">
+    A page named exactly: 
+    <input type="text" name="exactname">
+    <input type="submit" value="Go">
+    </form>
+<li> Anything you want, you don't have to use these forms.
+</ul>
+
+<b>Usage notes:</b>
+<ul>
+
+<li>You can use any URL in this directory matching the pattern
+"./XXXXXXXXX.wb", ( ./[a-zA-Z0-9._+=-]+\.wb , actually) and you get an
+interactive whiteboard you can edit with multiple people.  
+
+<li> Change the extension to ".txt" to get a static version.
+
+<li>Permanence: *Not* guaranteed to be permanent.  However, it *is*
+statically stored on the server, so will survive past reboots.  The
+delete-time right now is set at one year, if you want it deleted
+sooner, just erase all text.
+
+<li>No edit history is kept, so note there is no long-term (or
+short-term) guarantee here- anyone with your URL could erase your
+work.  One workaround is to keep the static link open.  Null files and
+files under 100 bytes may be deleted sooner.
+
+<li>The data/ directory will never be publicly browseable - so if your
+URL is secret, it is safe from all but the server admin.
+
+</ul>
+
+<b>About This Service:</b><p>
+
+This service is run by <a href="http://rkd.zgib.net">Richard
+Darst</a>.  It should be considered alpha/beta right now, but stable
+enough and with a responsive person to help fix stuff.<p>
+
+I certainly didn't do all of this myself, I just trivially hooked it
+together.  See <a
+href="http://code.google.com/p/google-mobwrite/">http://code.google.com/p/google-mobwrite/</a>
+for the true source.  Mobwrite is released under the Apache License,
+and I hereby release all of my code under the same.<p>
+
+For help/questions, see Richard (nick MrBeige) in #debian-nyc on
+OFTC.<p>
+
+<hr>
+code and other stuff below this line (will be darcs-able sometime in
+the future.)

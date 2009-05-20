@@ -1,0 +1,32 @@
+<html>
+<!--<script src="http://mobwrite2.appspot.com/static/compressed_form.js"></script>-->
+<script src="compressed_form.js"></script>
+<script language="JavaScript">
+  function leave() {
+    <!--alert("leaving page")-->
+  }
+
+<!--   function show_stuff() { -->
+<!--     document.formname.submit() -->
+<!--     alert(document.getElementById(textareaID).value); -->
+<!--   } -->
+
+</script>
+
+  <!--mobwrite.syncGateway='http://mobwrite2.appspot.com/scripts/q.py';-->
+<body onload="
+  mobwrite.syncGateway='q.py.mpy';
+  mobwrite.share('%(textareaID)s');
+  "
+  onUnload="leave()">
+
+
+<form name="formname" action="getdata.py">
+<!--<button onclick="show_stuff()">this is a button!</button>-->
+<!--<textarea ID="rkd_test_area">xxxxxxyyyyyzzz</textarea>-->
+<!--<textarea ID=textareaID style="width: 100%%; height: 95%%"></textarea>-->
+<textarea ID="%(textareaID)s" style="width: 100%%; height:95%%"></textarea>
+</form>
+<a href="%(staticLink)s">Static link</a> (updated every minute, requires no javascript)
+</body>
+</html>

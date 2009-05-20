@@ -1,0 +1,35 @@
+<html>
+<script src="http://mobwrite2.appspot.com/static/compressed_form.js"></script>
+<script language="JavaScript">
+  pageBasename = document.URL.split('/').reverse()[0].split('.')[0];
+  textareaID = 'rkd_at_zgib_net__' + pageBasename;
+  textareaID = 'rk6o6rk64o_main_form'
+
+  function leave() {
+    <!--alert("leaving page")-->
+  }
+
+<!--   function show_stuff() { -->
+<!--     document.formname.submit() -->
+<!--     alert(document.getElementById(textareaID).value); -->
+<!--   } -->
+
+</script>
+
+<body onload="
+  mobwrite.syncGateway='http://mobwrite2.appspot.com/scripts/q.py';
+  mobwrite.share(textareaID);
+  "
+  onUnload="leave()">
+
+
+<form name="formname" action="getdata.py">
+<!--<button onclick="show_stuff()">this is a button!</button>-->
+<!--<textarea ID="rkd_test_area">xxxxxxyyyyyzzz</textarea>-->
+<!--<textarea ID=textareaID style="width: 100%; height: 95%"></textarea>-->
+<textarea ID="rk6o6rk64o_main_form" style="width: 100%; height:
+95%"></textarea>
+</form>
+
+</body>
+</html>
