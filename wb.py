@@ -7,6 +7,10 @@ data = cgi.FieldStorage()
 import os
 import sys
 
+#syncGateway_ = ""
+syncGateway_ = "mobwrite.syncGateway='http://wb2.zgib.net:16546/q.py.mpy';\n"
+# additional banner at the bottom.  Can use html codes.
+pageNews_ = "(updated every minute, no js)"
 
 def do_whiteboard(pageName):
     print "Content-Type: text/html"
@@ -17,6 +21,8 @@ def do_whiteboard(pageName):
     #print textareaID
     page = file('wb.html.template').read()
 
+    syncGateway = syncGateway_  # needs to be a local variable!
+    pageNews = pageNews_
     page = page%locals()
     print page
 

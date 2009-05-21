@@ -1,5 +1,16 @@
+# Install mobwrite.  Default installion assumes it is in /mobwrite
+wget <mobwrite_daemon>.zip
+unzip <mobwrite_daemon>.zip
 
+cp mobwrite/daemon/q.py .         # if updated
+ln -s mobwrite/compressed_form.js .
 
 ln -s htaccess .htaccess
 ln -s q.py   q.py.mpy           # make it a mod_python script for speed
 ln -s wb.py  wb.py.cgi          # make it a cgi script
+
+The port needs to be configured in three places:
+q.py ; rundaemon.py ; wb.py
+
+The syncGateway needs to be adjusted in wb.py (leave it blank for the
+default, q.py.mpy in the present directory)

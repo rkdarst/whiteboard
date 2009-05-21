@@ -1,5 +1,4 @@
 <html>
-<!--<script src="http://mobwrite2.appspot.com/static/compressed_form.js"></script>-->
 <script src="compressed_form.js"></script>
 <script language="JavaScript">
   function leave() {
@@ -13,20 +12,18 @@
 
 </script>
 
-  <!--mobwrite.syncGateway='http://mobwrite2.appspot.com/scripts/q.py';-->
+<!--mobwrite.syncGateway='http://mobwrite2.appspot.com/scripts/q.py';-->
 <body onload="
   mobwrite.syncGateway='q.py.mpy';
   mobwrite.share('%(textareaID)s');
+  %(syncGateway)s
   "
   onUnload="leave()">
 
 
 <form name="formname" action="getdata.py">
-<!--<button onclick="show_stuff()">this is a button!</button>-->
-<!--<textarea ID="rkd_test_area">xxxxxxyyyyyzzz</textarea>-->
-<!--<textarea ID=textareaID style="width: 100%%; height: 95%%"></textarea>-->
 <textarea ID="%(textareaID)s" style="width: 100%%; height:95%%"></textarea>
 </form>
-<a href="%(staticLink)s">Static link</a> (updated every minute, requires no javascript)
+<a href="%(staticLink)s">Static link</a> %(pageNews)s
 </body>
 </html>

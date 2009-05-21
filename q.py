@@ -49,7 +49,7 @@ def handler(req):
   inStr = ''
   s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
   try:
-    s.connect(("localhost", 3017))
+    s.connect(("localhost", 30711))
   except socket.error, msg:
     s = None
   if not s:

@@ -6,12 +6,13 @@ IndexOptions Charset=utf-8
 AddHandler cgi-script cgi .cgi
 AddHandler mod_python .mpy
 PythonHandler q
-<Files q.py.mpy>
-    # you really want to not log requests to q.py.mpy.  For your logfile, set:
-    # CustomLog <filename> combined env=!dontlog
-    # (clearly, the env=!dontlog is the part you need to have)
-    SetEnv dontlog
-</Files>
+#<Files q.py.mpy>
+#    # you really want to not log requests to q.py.mpy.  For your logfile, set:
+#    # CustomLog <filename> combined env=!dontlog
+#    # (clearly, the env=!dontlog is the part you need to have)
+#    SetEnv dontlog
+#</Files>
+SetEnvIf Request_URI q.py.mpy dontlog
 
 
 RewriteEngine On
