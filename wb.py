@@ -17,6 +17,7 @@ def do_whiteboard(pageName):
     print
     #textareaID = 'rkd_at_zgib_net__' + os.path.basename(pageName)
     textareaID = 'wb_' + os.path.basename(pageName)
+    shortname = os.path.basename(pageName)
     staticLink = pageName+'.txt'
     #print textareaID
     page = file('wb.html.template').read()
