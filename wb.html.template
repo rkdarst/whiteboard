@@ -1,20 +1,16 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-<script src="compressed_form.js"></script>
-<script language="JavaScript">
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<script type="text/javascript" src="compressed_form.js"></script>
+<script type="text/javascript">
   function leave() {
     <!--alert("leaving page")-->
   }
 
-<!--   function show_stuff() { -->
-<!--     document.formname.submit() -->
-<!--     alert(document.getElementById(textareaID).value); -->
-<!--   } -->
-
 </script>
-
-<!--mobwrite.syncGateway='http://mobwrite2.appspot.com/scripts/q.py';-->
+</head>
 <body onload="
-  mobwrite.syncGateway='q.py.mpy';
   mobwrite.share('%(textareaID)s');
   %(syncGateway)s
   "
