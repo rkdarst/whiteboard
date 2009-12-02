@@ -1,16 +1,58 @@
-# Install mobwrite.  Default installion assumes it is in /mobwrite
-wget <mobwrite_daemon>.zip
-unzip <mobwrite_daemon>.zip
+# Install whiteboard.  If you are reading this on your local computer,
+# it may already be installed.
+darcs get http://code.zgib.net/whiteboard/
+cd whiteboard/
 
-cp mobwrite/daemon/q.py .         # if updated
+# Install mobwrite.  Default installion assumes it is in ./mobwrite .
+# There are local changes to this copy needed for saving properly
+darcs get http://code.zgib.net/mobwrite/
+ls mobwrite/
+
+
+
+#
+# Set up some file links.
+#
+
 ln -s mobwrite/compressed_form.js .
-
 ln -s htaccess .htaccess
-ln -s q.py   q.py.mpy           # make it a mod_python script for speed
 ln -s wb.py  wb.py.cgi          # make it a cgi script
+mkdir data/
+chown USER data/
 
-The port needs to be configured in three places:
-q.py ; rundaemon.py ; wb.py
+# You need to make q.py be a cgi script.  This gets hit *very* often (every second or so.  It's the sync gateway
+ln -s q.py   q.py.mpy           # make it a mod_python script for speed
+ln -s q.py   q.py.cgi           # Or, you can make it a plain cgi script
 
-The syncGateway needs to be adjusted in wb.py (leave it blank for the
-default, q.py.mpy in the present directory)
+# Look at .htaccess and see what it does.  You don't have to use this,
+# htaccess, you should integrate it with your server however you'd like to...
+# Basically, NAME.wb  gets remapped to wb.py.cgi
+#            NAME.txt gets remapped to data/wb_NAME.txt
+# We make sure not to log access to q.* since there are MANY of them
+# Define the various things to be CGI.
+
+
+
+#
+# Local configuration
+#
+
+# syncGateway is what the user's browser uses to communicate with the web
+# server.
+# The syncGateway needs to be adjusted in wb.py (leave it blank for the
+# default, q.py.mpy in the present directory(?))
+
+# PORT is what is used to communicate between the sync gateway (q.py) and
+# the mobwrite daemon running on localhost.
+# The port needs to be configured in three places:
+q.py ; rundaemon.py
+
+
+
+#
+# Running it
+#
+
+# This is kind of a hack, but runs mobwrite from within the mobwrite/
+# directory.
+python rundemon.py
