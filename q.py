@@ -28,6 +28,8 @@ __author__ = "fraser@google.com (Neil Fraser)"
 
 import socket
 
+PORT = 30711
+
 def handler(req):
   if req == None:
     # CGI call
@@ -36,7 +38,8 @@ def handler(req):
   else:
     # mod_python call
     req.content_type = 'text/plain'
-    form = util.FieldStorage(req)
+    # Publisher mode provides req.form, regular mode does not.
+    form = getattr(req, "form", util.FieldStorage(req))
 
   outStr = '\n'
   if form.has_key('q'):
@@ -49,13 +52,15 @@ def handler(req):
   inStr = ''
   s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
   try:
-    s.connect(("localhost", 30711))
+    s.connect(("localhost", PORT))
   except socket.error, msg:
     s = None
   if not s:
     # Python CGI can't connect to Python daemon.
     inStr = '\n'
   else:
+    # Timeout if MobWrite daemon dosen't respond in 10 seconds.
+    s.settimeout(10.0)
     s.send(outStr)
     while 1:
       line = s.recv(1024)
