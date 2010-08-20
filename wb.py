@@ -44,6 +44,14 @@ def do_statictext(pageName):
             newText.append(textwrap.fill(line, width=width))
         text = "\n".join(newText)
         print text
+    elif data.getfirst('markup'):
+        print "Content-Type: text/html"
+        print
+        import textile
+        print type(text)
+        text = text.encode('utf-8')
+        text = textile.textile(text, sanitize=True)
+        print text
     else:
         print "Content-Type: text/plain"
         print
