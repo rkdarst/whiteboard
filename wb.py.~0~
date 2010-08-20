@@ -5,12 +5,12 @@ import cgi
 import cgitb ; cgitb.enable()
 data = cgi.FieldStorage()
 import os
-import re
 import sys
 
-#syncGateway_ = ""
-syncGateway_ = "mobwrite.syncGateway='http://wb2.zgib.net:16546/q.py.mpy';\n"
-# additional banner at the bottom.  Can use html codes.
+# Relative URL to the sync gateway.
+syncGateway_ = "mobwrite.syncGateway='q.py.mpy';\n"
+#syncGateway_ = "mobwrite.syncGateway='q.py.cgi';\n"
+# additional banner at the bottom.  It is HTML.  Edit to your desires.
 pageNews_ = "(updated every minute, no js)"
 
 def do_whiteboard(pageName):
@@ -27,27 +27,6 @@ def do_whiteboard(pageName):
     page = page%locals()
     print page
 
-def do_statictext(pageName):
-#    text = open("data/wb_%s.txt"%pageName).read()
-    text = mobwritelib.download(syncServerGateway, ['wb_'+pageName])['wb_'+pageName]
-    if data.getfirst('wrap'):
-        print "Content-Type: text/plain"
-        print
-        width = 72
-        try:
-            width = int(data.getfirst('wrap'))
-        except ValueError:
-            pass
-        newText = []
-        import textwrap
-        for line in text.split("\n"):
-            newText.append(textwrap.fill(line, width=width))
-        text = "\n".join(newText)
-        print text
-    else:
-        print "Content-Type: text/plain"
-        print
-        print text
 
 
 if data.getfirst("new"):
@@ -75,13 +54,9 @@ if data.getfirst("new"):
 
 
 pageName = os.environ["REQUEST_URI"]
-m_txt = re.match("/([a-zA-z0-9._+=-]+)\.txt", pageName)
 if pageName[-3:] == ".wb":
     pageName = pageName[:-3]
     do_whiteboard(pageName)
-elif m_txt:
-    pageName = m_txt.group(1)
-    do_statictext(pageName)
 else:
     print "Content-Type: text/plain"
     print

@@ -16,4 +16,6 @@ SetEnvIf Request_URI q.py.cgi dontlog
 
 RewriteEngine On
 RewriteRule ^[a-zA-Z0-9._+=-]+\.wb wb.py.cgi
-RewriteRule ^([a-zA-Z0-9._+=-]+)\.txt data/wb_$1.txt
+RewriteCond %{QUERY_STRING} .+
+RewriteRule ^([a-zA-Z0-9._+=-]+)\.txt wb.py.cgi
+RewriteRule ^([a-zA-Z0-9._+=-]+)\.txt$ data/wb_$1.txt
