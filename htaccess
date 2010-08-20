@@ -11,6 +11,7 @@ PythonHandler q
 # CustomLog <filename> combined env=!dontlog
 # (clearly, the env=!dontlog is the part you need to have)
 SetEnvIf Request_URI q.py.mpy dontlog
+SetEnvIf Request_URI q.py.cgi dontlog
 
 
 RewriteEngine On
