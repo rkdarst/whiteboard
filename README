@@ -8,7 +8,10 @@ cd whiteboard/
 darcs get http://code.zgib.net/mobwrite/
 ls mobwrite/
 
-
+# At this point the directory layouts should look like this:
+# ./whiteboard/
+# ./whiteboard/mobwrite/
+# ./whiteboard/ is the web server root or directory that is being served.
 
 #
 # Set up some file links.
@@ -17,12 +20,14 @@ ls mobwrite/
 ln -s mobwrite/compressed_form.js .
 ln -s htaccess .htaccess
 ln -s wb.py  wb.py.cgi          # make it a cgi script
+chmod a+x wb.py
 mkdir data/
 chown USER data/
 
 # You need to make q.py be a cgi script.  This gets hit *very* often (every second or so.  It's the sync gateway
 ln -s q.py   q.py.mpy           # make it a mod_python script for speed
 ln -s q.py   q.py.cgi           # Or, you can make it a plain cgi script
+chmod a+x q.py
 
 # Look at .htaccess and see what it does.  You don't have to use this,
 # htaccess, you should integrate it with your server however you'd like to...
@@ -41,11 +46,12 @@ ln -s q.py   q.py.cgi           # Or, you can make it a plain cgi script
 # server.
 # The syncGateway needs to be adjusted in wb.py (leave it blank for the
 # default, q.py.mpy in the present directory(?))
+emacs wb.py
 
 # PORT is what is used to communicate between the sync gateway (q.py) and
 # the mobwrite daemon running on localhost.
 # The port needs to be configured in three places:
-q.py ; rundaemon.py
+emacs q.py rundaemon.py
 
 
 
@@ -54,5 +60,5 @@ q.py ; rundaemon.py
 #
 
 # This is kind of a hack, but runs mobwrite from within the mobwrite/
-# directory.
-python rundemon.py
+# directory.  Run this as the user that owns the data/ directory.
+python rundaemon.py
