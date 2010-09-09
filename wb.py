@@ -43,19 +43,19 @@ def do_statictext(pageName):
         for line in text.split("\n"):
             newText.append(textwrap.fill(line, width=width))
         text = "\n".join(newText)
-        print text
+        print text.encode('utf-8')
     elif data.getfirst('markup'):
         print "Content-Type: text/html"
         print
         import textile
         print type(text)
         text = text.encode('utf-8')
-        text = textile.textile(text, sanitize=True)
+        text = textile.textile(text, sanitize=True, encoding='utf-8')
         print text
     else:
         print "Content-Type: text/plain"
         print
-        print text
+        print text.encode('utf-8')
 
 
 if data.getfirst("new"):
