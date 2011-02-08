@@ -18,6 +18,7 @@ pageNews_ = "(updated every minute, no js)"
 
 class WhiteboardPage(object):
     template_wb = 'wb.html.template'
+    template_options = 'options.html.template'
 
     def __init__(self, id, options=None):
         self.id = id
@@ -72,7 +73,13 @@ class WhiteboardPage(object):
         page = open(self.template_wb).read()
         page = page%self
         return header + page
-    def ext_txt(self, wrap=False):
+    def ext_opts(self):
+        """Controllable whiteboard options"""
+        header = "Content-Type: text/html; charset=%s\n\n"%self.encoding
+        page = open(self.template_options).read()
+        page = page%self
+        return header + page
+    def ext_txt(self):
         """Raw text contained in this whiteboard, text/plain"""
         text = self.raw_text
         header = "Content-Type: text/plain; charset=%s\n\n"%self.encoding
