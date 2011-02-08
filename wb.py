@@ -19,8 +19,9 @@ pageNews_ = "(updated every minute, no js)"
 class WhiteboardPage(object):
     template_wb = 'wb.html.template'
 
-    def __init__(self, id):
+    def __init__(self, id, options=None):
         self.id = id
+        self.options = options
     def __getitem__(self, key):
         """Mapping (dictionary) interface"""
         # This is needed so that template % self will work
@@ -161,11 +162,11 @@ if not m:
 id_ = m.group(1)
 ext = m.group(2)
 if hasattr(WhiteboardPage, 'ext_'+ext):
-    wbp = WhiteboardPage(id_)
+    wbp = WhiteboardPage(id_, options=data)
     print getattr(wbp, 'ext_'+ext)()
 elif data.getfirst('markup') == "rst":
-    print WhiteboardPage(id_).rst()
+    print WhiteboardPage(id_, options=data).rst()
 elif data.getfirst('markup'):
-    print WhiteboardPage(id_).textile()
+    print WhiteboardPage(id_, options=data).textile()
 else:
     print 'x'
