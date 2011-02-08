@@ -67,9 +67,12 @@ class WhiteboardPage(object):
         text = self.raw_text
         header = "Content-Type: text/plain; charset=%s\n\n"%self.encoding
         # Wrap text?
-        if wrap:
-            if isinstance(wrap, int): width = wrap
-            else:                     width = 72
+        if hasattr(self, 'options') and self.options.getfirst('wrap'):
+            wrap = self.options.getfirst('wrap')
+            try:
+                width = int(wrap)
+            except ValueError:
+                width = 72
             newText = []
             import textwrap
             for line in text.split("\n"):
