@@ -96,6 +96,7 @@ class WhiteboardPage(object):
                 newText.append(textwrap.fill(line, width=width))
             text = "\n".join(newText)
         return header + text.encode('utf-8')
+    ext_txt2 = ext_txt
     def ext_textile(self):
         """Render the whiteboard using textile."""
         header = "Content-Type: text/html; charset=%s\n\n"%self.encoding
