@@ -19,7 +19,7 @@
 
 
 <form name="formname" action="getdata.py">
-<textarea ID="%(mobID)s" style="width: 100%%; height:95%%"></textarea>
+<textarea ID="%(mobID)s" %(textarea_style)s></textarea>
 </form>
 <a href="%(staticLink)s">Static link</a> %(pageNews)s
 </body>

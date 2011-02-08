@@ -34,6 +34,16 @@ class WhiteboardPage(object):
     def staticLink(self):
         """URL to link for for .txt copy"""
         return self.id + '.txt'
+    @property
+    def textarea_style(self):
+        style = "height:95%"
+        if hasattr(self, 'options') and self.options.getfirst('cols'):
+            try:
+                cols = int(self.options.getfirst('cols'))
+                return 'style="height: 95%%" cols="%d"'%cols
+            except ValueError:
+                pass
+        return 'style="width: 100%; height:95%"'
     syncGateway = syncGateway_
     pageNews = pageNews_
     encoding = "utf-8"

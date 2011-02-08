@@ -1,0 +1,20 @@
+<html>
+<head>
+    <title>%(id)s - options - whiteboard</title>
+</head>
+<body>
+<ul>
+    <li><a href="%(id)s.wb">Editable page</a></li>
+    <ul>
+        <li><form action="%(id)s.wb">Limit to <input type="text" name="cols" size="3"> columns <input type="submit" value="Go"></form></li>
+    </ul>
+    <li><a href="%(id)s.rst">Page rendered in ReStructured Text</a></li>
+    <li><a href="%(id)s.textile">Page rendered in Textile</a></li>
+    <li><a href="%(id)s.txt2">Static text (instantly updated)</a></li>
+    <ul>
+        <li><form action="%(id)s.txt2">Limit to <input type="text" name="wrap" size="3"> columns <input type="submit" value="Go"></form></li>
+    </ul>
+    <li><a href="%(id)s.txt">Static text (committed to disk every 60 seconds)</a></li>
+</ul>
+</body>
+</html>
