@@ -7,6 +7,12 @@ for name in dir(CGIHTTPServer):
     globals()[name] = getattr(CGIHTTPServer, name)
 
 import re
+import sys
+
+if len(sys.argv) > 1:
+    port = int(sys.argv[1])
+else:
+    port = 8080
 
 class server(CGIHTTPServer.CGIHTTPRequestHandler, object):
 
@@ -18,6 +24,10 @@ class server(CGIHTTPServer.CGIHTTPRequestHandler, object):
                            r'/wb.py.cgi',                  self.path)
         self.path = re.sub(r'^/([a-zA-Z0-9._+=-]+)\.txt$',
                            r'/data/wb_\1.txt',             self.path)
+        self.path = re.sub(r'^/[a-zA-Z0-9._+=-]+\.(rst|textile|rawtxt|rawtxt2)$',
+                           r'/wb.py.cgi',                  self.path)
+        self.path = re.sub(r'^/[a-zA-Z0-9._+=-]+\.txt\?.*',
+                           r'/wb.py.cgi',                  self.path)
         self.path = re.sub(r'^/sync$',
                            r'/q.py.cgi',                   self.path)
         print self.path, self.oldpath
@@ -259,7 +269,7 @@ class server(CGIHTTPServer.CGIHTTPRequestHandler, object):
 
 
 
-server.cgi_directories = ['/test.sh', '/wb.py.cgi', '/q.py.cgi']
+server.cgi_directories = ['/test.sh', '/wb.py.cgi', '/q.py.cgi', '/q.py.mpy']
 #print server.cgi_directories
 #for k,v in server.extensions_map.items():
 #    print k, v
@@ -267,6 +277,6 @@ server.extensions_map[''] = 'text/plain'
 server.extensions_map['.sh'] = 'text/plain'
 server.extensions_map['.py'] = 'text/plain'
 
-httpd = BaseHTTPServer.HTTPServer(('',8000),
+httpd = BaseHTTPServer.HTTPServer(('',port),
                           server)
 httpd.serve_forever()
