@@ -184,7 +184,7 @@ if data.getfirst("new"):
     sys.exit(0)
 
 pageName = os.environ["REQUEST_URI"]
-m = re.match("/([a-zA-z0-9._+=-]+)\.([a-zA-Z0-9]+)", pageName)
+m = re.match("^.*/([a-zA-z0-9._+=-]+)\.([a-zA-Z0-9]+)", pageName)
 
 # Handle bad URLs
 if not m:
