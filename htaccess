@@ -1,6 +1,6 @@
 HeaderName header.html
 AddDefaultCharset utf-8
-AddCharset utf-8 .txt .html .wb
+AddCharset utf-8 .txt .html .wb .md .textile .rst
 IndexOptions Charset=utf-8
 
 AddHandler cgi-script cgi .cgi
@@ -15,7 +15,7 @@ SetEnvIf Request_URI q.py.cgi dontlog
 
 
 RewriteEngine On
-RewriteRule ^[a-zA-Z0-9._+=-]+\.(wb|textile|rst|opts|txt2) wb.py.cgi
+RewriteRule ^[a-zA-Z0-9._+=-]+\.(wb|textile|rst|opts|txt2|md) wb.py.cgi
 RewriteCond %{QUERY_STRING} .+
 RewriteRule ^([a-zA-Z0-9._+=-]+)\.txt wb.py.cgi
 RewriteRule ^([a-zA-Z0-9._+=-]+)\.txt$ data/wb_$1.txt

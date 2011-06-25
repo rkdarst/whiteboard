@@ -21,6 +21,6 @@
 <form name="formname" action="getdata.py">
 <textarea ID="%(mobID)s" %(textarea_style)s></textarea>
 </form>
-<a href="%(staticLink)s">Static link</a> %(pageNews)s
+<a href="%(staticLink)s">Static link</a>, <a href="%(id)s.opts">Options</a> %(pageNews)s
 </body>
 </html>

@@ -9,16 +9,17 @@ sys.path.insert(0, 'mobwrite/tools')
 import mobwritelib
 del sys.path[0]
 
-# Relative URL to the sync gateway.
-#syncGateway_ = "mobwrite.syncGateway='q.py.mpy';\n"
-syncGateway_ = "mobwrite.syncGateway='q.py.cgi';\n"
-syncServerGateway = 'telnet://localhost:30711'
-# additional banner at the bottom.  It is HTML.  Edit to your desires.
-pageNews_ = "(updated every minute, no js)"
 
 class WhiteboardPage(object):
+    encoding = "utf-8"
     template_wb = 'wb.html.template'
     template_options = 'options.html.template'
+    # Relative URL to the sync gateway.
+    syncGateway = "mobwrite.syncGateway='q.py.mpy';\n"
+    #syncGateway = "mobwrite.syncGateway='q.py.cgi';\n"
+    syncServerGateway = 'telnet://localhost:30711'
+    # additional banner at the bottom.  It is HTML.  Edit to your desires.
+    pageNews = ""
 
     def __init__(self, id, options=None):
         self.id = id
@@ -45,13 +46,10 @@ class WhiteboardPage(object):
             except ValueError:
                 pass
         return 'style="width: 100%; height:95%"'
-    syncGateway = syncGateway_
-    pageNews = pageNews_
-    encoding = "utf-8"
     @property
     def raw_text(self):
         """Raw text as retrieved by the server."""
-        return mobwritelib.download(syncServerGateway,[self.mobID])[self.mobID]
+        return mobwritelib.download(self.syncServerGateway,[self.mobID])[self.mobID]
     @property
     def raw_text2(self):
         """Raw text as retrieved from the filesystem"""
@@ -60,6 +58,13 @@ class WhiteboardPage(object):
     def _filename(self):
         """Filename of storage on the filesystem"""
         return "data/wb_" + self.id + ".txt"
+    @property
+    def wordcounts(self):
+        data = self.raw_text
+        chars = len(data)
+        words = len(data.split())
+        lines = len(data.split("\n"))
+        return "%d %d %d"%(chars, words, lines)
     def exists(self):
         """Return True if this whiteboard id already"""
         if os.access(self._filename, os.F_OK):
@@ -120,6 +125,15 @@ class WhiteboardPage(object):
             writer_name='html')
 #        text = text.encode('utf-8', 'replace')
         return header + text
+    def ext_md(self):
+        header = "Content-Type: text/html; charset=%s\n\n"%self.encoding
+        import markdown
+        text = self.raw_text
+        #text = self.raw_text2
+        #text = text.decode('utf-8', 'replace')
+        html = markdown.markdown(text, safe_mode="escape")
+        html = html.encode('utf-8', 'replace')
+        return header + html
     def ext_rawtxt(self):
         header = "Content-Type: text/plain; charset=%s\n\n"%self.encoding
         text = self.raw_text
@@ -128,6 +142,7 @@ class WhiteboardPage(object):
     def ext_rawtxt2(self):
         header = "Content-Type: text/plain; charset=%s\n\n"%self.encoding
         text = self.raw_text2
+#        text = text.encode('utf-8', 'replace')
         return header + text
 
 
@@ -144,7 +159,7 @@ def randompageRedirect(data):
             wbName = hex(int(random.uniform(0, 16**6)))[2:]
             if prefix:
                 wbName = prefix + "_" + wbName
-            if not WhitboardPage(id=wbName).exists():
+            if not WhiteboardPage(id=wbName).exists():
                 break
     urlName = wbName + ".wb"
     response = ["303 See Other:",
