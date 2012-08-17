@@ -1,0 +1,13 @@
+<VirtualHost *:80>
+  ServerName wb.zgib.net
+  ServerAlias wb2.zgib.net whiteboard.debian.net *.wb.zgib.net
+  DocumentRoot /srv/www/code/
+
+  <Directory /srv/rkd/wb/*>
+    RewriteEngine Off
+  </Directory>
+
+  #KeepAliveTimeout 1
+  #SetEnvIf Request_URI q\.py\.mpy nokeepalive
+
+</VirtualHost>

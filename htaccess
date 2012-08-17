@@ -10,6 +10,9 @@ PythonHandler q
 # you really want to not log requests to q.py.mpy.  For your logfile, set:
 # CustomLog <filename> combined env=!dontlog
 # (clearly, the env=!dontlog is the part you need to have)
+# On Debian:
+# /etc/apache2/conf.d/other-vhosts-access.log
+# or /etc/apache2/sites-available/default
 SetEnvIf Request_URI q.py.mpy dontlog
 SetEnvIf Request_URI q.py.cgi dontlog
 
