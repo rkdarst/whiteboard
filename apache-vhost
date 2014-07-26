@@ -1,9 +1,9 @@
 <VirtualHost *:80>
   ServerName wb.zgib.net
-  ServerAlias wb2.zgib.net whiteboard.debian.net *.wb.zgib.net
-  DocumentRoot /srv/rkd/wb/
+  ServerAlias wb2.zgib.net whiteboard.debian.net wb.debian.net *.wb.zgib.net
+  DocumentRoot /srv/wb/
 
-  <Directory /srv/rkd/wb/data/*>
+  <Directory /srv/wb/data/*>
     AllowOverride None
   </Directory>
 
