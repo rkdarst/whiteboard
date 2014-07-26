@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# Runit service
+
+exec 2>&1
+exec chpst -u www-data python rundaemon.py -l WARN
