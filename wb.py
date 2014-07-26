@@ -17,7 +17,7 @@ class WhiteboardPage(object):
     # Relative URL to the sync gateway.
     syncGateway = "mobwrite.syncGateway='q.py.mpy';\n"
     #syncGateway = "mobwrite.syncGateway='q.py.cgi';\n"
-    syncServerGateway = 'telnet://localhost:30711'
+    syncServerGateway = 'telnet://localhost:30712'
     # additional banner at the bottom.  It is HTML.  Edit to your desires.
     pageNews = ""
 

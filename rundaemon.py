@@ -15,7 +15,7 @@ options.setdefault('-l', 'INFO')
 
 mobwrite_daemon.MAX_VIEWS = 100
 mobwrite_daemon.STORAGE_MODE = mobwrite_daemon.FILE
-mobwrite_daemon.LOCAL_PORT = 30711 # adjust
+mobwrite_daemon.LOCAL_PORT = 30712 # adjust
 
 mobwrite_core.MAX_CHARS = 30000
 mobwrite_core.TIMEOUT_TEXT = mobwrite_core.datetime.timedelta(days=31)
