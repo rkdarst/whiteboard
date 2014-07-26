@@ -1,0 +1,1 @@
+mobwrite/compressed_form.js
